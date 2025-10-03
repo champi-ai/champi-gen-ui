@@ -1,3 +1,4 @@
+# External dependencies
 .external/
 !.external/repos.txt
 
@@ -10,43 +11,103 @@
 .mcp.json
 
 # Environment configuration
-.env.local
 .env
+.env.*
+!.env.example
+.envrc
 
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
+*.py[cod]
+*$py.class
 *.so
+.Python
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+champi_stt.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Testing
 .pytest_cache/
 .coverage
 .coverage.*
 htmlcov/
-.mypy_cache/
-.ruff_cache/
-.hypothesis/
 .tox/
+.nox/
+.hypothesis/
 *.cover
 *.py,cover
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+pytestdebug.log
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Linting
+.ruff_cache/
 
 # Virtual environments
 venv/
 env/
+ENV/
+env.bak/
+venv.bak/
 .venv/
 test-env/
 test-pkg-env/
 
-# IDE
+# IDEs
 .vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 .idea/
 *.swp
 *.swo
 *~
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
 
-# OS
+# OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 desktop.ini
 
@@ -61,14 +122,8 @@ tmp/
 temp/
 .tmp/
 *.tmp
-
-# Build artifacts
-dist/
-build/
-*.egg-info/
-champi_stt.egg-info/
-.eggs/
-*.whl
+*.bak
+*.orig
 
 # Test artifacts
 test_output/
@@ -84,21 +139,25 @@ debug_recordings/
 # Documentation build
 docs/_build/
 docs/promote/
+site/
+.doctrees/
 
 # Strategic/Private documents
 docs/mcp_champi-brand/
 
 # Local configuration
 .claude/settings.local.json
+*.local
 
-# Node modules (for livekit frontend)
+# Node modules (for any JS tooling)
 node_modules/
 .npm/
+.yarn/
+package-lock.json
+yarn.lock
 
 # Misc
 .cache/
-*.bak
-*.orig
 social
 recover-mcp_champi-promote/
 
@@ -106,8 +165,31 @@ recover-mcp_champi-promote/
 *.db
 *.sqlite
 *.sqlite3
+*.db-journal
 workflow.db
 
 # Runtime files
 *.pid
 *.lock
+!uv.lock
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Pre-commit
+.secrets.baseline
+
+# UV package manager
+.uv_cache/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows
+$RECYCLE.BIN/
+
+# Linux
+.directory
+.Trash-*
