@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Non-blocking UI rendering infrastructure with background threading
+- Command queue system for thread-safe widget operations
+- Auto-start canvas mechanism for MCP-driven UI creation
+- Automatic widget rendering when added via MCP tools
+- Signal handlers for graceful shutdown (SIGINT, SIGTERM)
+- `run_async()` method for non-blocking canvas execution
+- `ensure_canvas_running()` helper for lazy canvas initialization
+- `_ensure_canvas_active()` helper in MCP server for automatic canvas startup
+- Comprehensive rendering infrastructure documentation (RENDERING_INFRASTRUCTURE.md)
+- Test script for verifying MCP → UI rendering pipeline
+
+### Changed
+- Canvas now supports both blocking (`run()`) and non-blocking (`run_async()`) modes
+- MCP widget tools now automatically ensure canvas is running before adding widgets
+- Widget additions now trigger automatic render updates via `_needs_render` flag
+- CLI entry point now includes cleanup handlers for proper resource management
+
+### Fixed
+- Critical issue where MCP tools could not trigger UI updates
+- Missing main UI event loop for background rendering
+- Thread safety issues between MCP server and UI rendering
+- Canvas not displaying widgets added via MCP tools
+
 ## [0.1.0] - 2025-10-03
 
 ### Added
