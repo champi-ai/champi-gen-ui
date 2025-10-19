@@ -66,6 +66,17 @@ Complete documentation for Champi-Gen-UI MCP Server.
 
 ---
 
+## 🔧 Workflow Guides
+
+9. **[TEMPLATE_WORKFLOW.md](TEMPLATE_WORKFLOW.md)** - Template management workflow
+   - When to save templates (only when UI is complete)
+   - Template creation best practices
+   - Loading and reusing templates
+   - Template organization strategies
+   - Error handling and troubleshooting
+
+---
+
 ## 📊 Quick Reference
 
 ### By Topic
@@ -127,6 +138,7 @@ Complete documentation for Champi-Gen-UI MCP Server.
 #### Save/Load UI
 1. Read [ARCHITECTURE.md](ARCHITECTURE.md#10-serialization-format)
 2. Check [MCP_TOOLS_API.md](MCP_TOOLS_API.md#17-exportimport-tools-8-tools)
+3. Follow [TEMPLATE_WORKFLOW.md](TEMPLATE_WORKFLOW.md) for template management
 
 #### Extend System
 1. Read [ARCHITECTURE.md](ARCHITECTURE.md#7-extension-integration)
@@ -248,12 +260,14 @@ champi-gen-ui/
 ├── README.md                      # Project overview
 ├── IMPLEMENTATION_PLAN.md         # Implementation roadmap
 ├── PLAN_SUMMARY.md                # Executive summary
+├── RENDERING_INFRASTRUCTURE.md    # Rendering system docs
 ├── docs/
 │   ├── INDEX.md                   # This file
 │   ├── ARCHITECTURE.md            # System architecture
 │   ├── MCP_TOOLS_API.md           # MCP tools reference
 │   ├── WIDGET_CATALOG.md          # Widget listing
 │   ├── EXTENSIONS_GUIDE.md        # Extensions guide
+│   ├── TEMPLATE_WORKFLOW.md       # Template workflow guide
 │   └── IMGUI_CORE_REFERENCE.md    # ImGui API reference
 ├── fast-mcp-docs/
 │   ├── full-documentation.txt     # FastMCP docs
@@ -268,9 +282,9 @@ champi-gen-ui/
 
 ## 📈 Documentation Stats
 
-- **Total Documents**: 8 markdown files
-- **Total Pages**: ~100+ pages
-- **Total Words**: ~50,000+ words
+- **Total Documents**: 9 markdown files
+- **Total Pages**: ~110+ pages
+- **Total Words**: ~55,000+ words
 - **Widgets Documented**: 150+
 - **MCP Tools Documented**: 200+
 - **ImGui Functions**: 200+
