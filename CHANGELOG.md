@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `_ensure_canvas_active()` helper in MCP server for automatic canvas startup
 - Comprehensive rendering infrastructure documentation (RENDERING_INFRASTRUCTURE.md)
 - Test script for verifying MCP → UI rendering pipeline
+- Template workflow documentation (TEMPLATE_WORKFLOW.md) with best practices for template management
 
 ### Changed
 - Canvas now supports both blocking (`run()`) and non-blocking (`run_async()`) modes
