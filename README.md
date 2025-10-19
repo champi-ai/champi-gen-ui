@@ -30,10 +30,10 @@ An MCP (Model Context Protocol) server that enables Large Language Models to cre
 ### Installation
 
 ```bash
-# Using UV (recommended)
 uv pip install champi-gen-ui
+```
 
-# Or with pip
+```bash
 pip install champi-gen-ui
 ```
 
