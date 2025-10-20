@@ -30,7 +30,7 @@ jobs:
       with:
         fetch-depth: 0
         fetch-tags: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
         persist-credentials: true
 
     - name: Install uv
