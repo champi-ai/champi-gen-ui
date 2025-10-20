@@ -51,6 +51,13 @@ jobs:
         echo "New version: $REV"
         echo "version=v${REV}" >> $GITHUB_OUTPUT
 
+        # Store whether version changed for later steps
+        if [[ "$REV" != "$PREV_REV" ]]; then
+          echo "version_changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "version_changed=false" >> $GITHUB_OUTPUT
+        fi
+
         # Extract incremental changelog for this version
         # Get content between the new version header and the previous version header
         if [[ "$REV" != "$PREV_REV" ]]; then
@@ -72,7 +79,7 @@ jobs:
           echo "Incremental changelog:"
           cat body.md
 
-          # Push changes and tags
+          # Push changes and tags to remote
           git push origin main --follow-tags
         else
           echo "No version change, skipping release"
@@ -89,9 +96,11 @@ jobs:
       run: uv python install 3.12
 
     - name: Build package
+      if: steps.cz.outputs.version_changed == 'true'
       run: uv build
 
     - name: Create GitHub Release
+      if: steps.cz.outputs.version_changed == 'true'
       uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 # v2.4.1
       with:
         body_path: body.md
