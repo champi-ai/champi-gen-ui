@@ -65,12 +65,3 @@ jobs:
           dist/*
         draft: false
         prerelease: false
-
-    - name: Publish to PyPI
-      if: github.ref == 'refs/heads/main'
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-      run: |
-        uv tool install twine
-        uv tool run twine upload dist/*
