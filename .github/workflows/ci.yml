@@ -47,7 +47,7 @@ jobs:
       run: uv run pytest --cov=champi_gen_ui --cov-report=xml --cov-report=term-missing
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@5c47607acb93fed5485fdbf7232e8a31425f672a # v5.0.2
+      uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
       if: matrix.python-version == '3.12'
       with:
         file: ./coverage.xml
@@ -84,7 +84,7 @@ jobs:
         fi
 
     - name: Upload security reports
-      uses: actions/upload-artifact@ea165f8d65b6e75b540e0bc8beea8f0bc47e89e6 # v4.5.0
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       if: always()
       with:
         name: security-reports
@@ -116,7 +116,7 @@ jobs:
         uv run twine check dist/*
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@ea165f8d65b6e75b540e0bc8beea8f0bc47e89e6 # v4.5.0
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
         name: dist
         path: dist/
