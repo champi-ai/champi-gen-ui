@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.0.0 (2025-10-20)
+
+### BREAKING CHANGE
+
+- Canvas creation now auto-starts by default.
+Use auto_start=False to preserve old behavior.
+
+### Feat
+
+- test automated release workflow (#10)
+- use custom RELEASE_TOKEN for bypassing branch protection
+- Add non-blocking UI rendering infrastructure (#3)
+
+### Fix
+
+- correct commitizen changelog configuration (#9)
+- handle incremental changelog extraction properly (#8)
+- add Docker Hub logout workaround for auth issues (#6)
+- pin commitizen-action to full commit SHA (#5)
+- only push tags in release workflow, not commits
+- correct commitizen changelog_start_rev to use v prefix
+- add explicit git fetch tags step in release workflow
+- ensure tags are fetched in release workflow
+
+### Refactor
+
+- replace Docker-based commitizen-action with native implementation (#7)
+- use official commitizen-action for releases (#4)
+
 ## v0.1.0 (2025-10-20)
 
 ### Feat
