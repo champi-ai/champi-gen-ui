@@ -1,6 +1,9 @@
 name: Release
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       bump_type:
@@ -42,9 +45,24 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+    - name: Determine version bump type
+      id: bump_type
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "type=${{ github.event.inputs.bump_type }}" >> $GITHUB_OUTPUT
+        else
+          # Auto-detect from commit messages (feat: = minor, fix: = patch, breaking: = major)
+          echo "type=auto" >> $GITHUB_OUTPUT
+        fi
+
     - name: Bump version and update changelog
       run: |
-        uv run cz bump --increment ${{ github.event.inputs.bump_type }} --yes
+        BUMP_TYPE="${{ steps.bump_type.outputs.type }}"
+        if [ "$BUMP_TYPE" = "auto" ]; then
+          uv run cz bump --yes
+        else
+          uv run cz bump --increment $BUMP_TYPE --yes
+        fi
         echo "NEW_VERSION=$(uv run cz version --project)" >> $GITHUB_ENV
 
     - name: Push changes
