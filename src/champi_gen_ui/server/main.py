@@ -97,6 +97,12 @@ for _name, theme in THEME_PRESETS.items():
     theme_manager.register_theme(theme)
 
 
+# Helper function to ensure canvas is active
+def _ensure_canvas_active(canvas_id: str) -> bool:
+    """Ensure canvas exists and is running."""
+    return canvas_manager.ensure_canvas_running(canvas_id)
+
+
 # Register widget types
 def register_widgets():
     """Register all widget types with factories."""
@@ -246,6 +252,9 @@ def add_button(
         if not canvas:
             return {"success": False, "error": f"Canvas {canvas_id} not found"}
 
+        # Ensure canvas is running
+        canvas_manager.ensure_canvas_running(canvas_id)
+
         widget = canvas.widget_registry.factory.create(
             "button", widget_id, label=label, size=size
         )
@@ -286,6 +295,9 @@ def add_text(
         canvas = canvas_manager.get_canvas(canvas_id)
         if not canvas:
             return {"success": False, "error": f"Canvas {canvas_id} not found"}
+
+        # Ensure canvas is running
+        _ensure_canvas_active(canvas_id)
 
         widget = canvas.widget_registry.factory.create(
             "text", widget_id, text=text, color=color, wrapped=wrapped
@@ -329,6 +341,9 @@ def add_input_text(
         canvas = canvas_manager.get_canvas(canvas_id)
         if not canvas:
             return {"success": False, "error": f"Canvas {canvas_id} not found"}
+
+        # Ensure canvas is running
+        _ensure_canvas_active(canvas_id)
 
         widget = canvas.widget_registry.factory.create(
             "input_text",

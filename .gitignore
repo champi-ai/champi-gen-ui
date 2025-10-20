@@ -142,6 +142,9 @@ docs/promote/
 site/
 .doctrees/
 
+# Large PDF documentation files
+imgui-docs/*.pdf
+
 # Strategic/Private documents
 docs/mcp_champi-brand/
 
