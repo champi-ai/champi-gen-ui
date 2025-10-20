@@ -32,7 +32,6 @@ jobs:
     - name: Configure Git
       run: |
         git config --local user.name "Divagnz"
-        git config --local user.email "divagnz@users.noreply.github.com"
         git config --local pull.rebase true
 
     - name: Run commitizen bump
@@ -79,11 +78,8 @@ jobs:
           echo "Incremental changelog:"
           cat body.md
 
-          # Push commit to remote
-          git push origin main
-
-          # Push tag that was created by cz bump
-          git push origin "v${REV}"
+          # Push commit and tags using authenticated URL (similar to commitizen-action)
+          git push https://Divagnz:${{ secrets.RELEASE_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main --tags
         else
           echo "No version change, skipping release"
           echo "No changes" > body.md
