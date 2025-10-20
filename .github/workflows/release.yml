@@ -64,14 +64,16 @@ jobs:
       run: |
         BUMP_TYPE="${{ steps.bump_type.outputs.type }}"
         if [ "$BUMP_TYPE" = "auto" ]; then
-          uv run cz bump --yes --no-verify
+          uv run cz bump --yes
         else
-          uv run cz bump --increment $BUMP_TYPE --yes --no-verify
+          uv run cz bump --increment $BUMP_TYPE --yes
         fi
         echo "NEW_VERSION=$(uv run cz version --project)" >> $GITHUB_ENV
 
-    - name: Push tags only
-      run: git push --tags
+    - name: Push changes
+      run: |
+        git push
+        git push --tags
 
     - name: Build package
       run: uv build
