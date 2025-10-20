@@ -78,10 +78,10 @@ jobs:
 
     - name: Run detect-secrets
       run: |
-        uv run detect-secrets scan --baseline .secrets.baseline || true
         if [ ! -f .secrets.baseline ]; then
-          uv run detect-secrets scan --baseline .secrets.baseline
+          uv run detect-secrets scan > .secrets.baseline
         fi
+        uv run detect-secrets scan --baseline .secrets.baseline || true
 
     - name: Upload security reports
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -112,8 +112,8 @@ jobs:
 
     - name: Check package metadata
       run: |
-        uv pip install twine
-        uv run twine check dist/*
+        uv tool install twine
+        uv tool run twine check dist/*
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
