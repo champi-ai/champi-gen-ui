@@ -5,24 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.0.0 (2025-10-20)
-
-### BREAKING CHANGE
-
-- Canvas creation now auto-starts by default. Use auto_start=False to preserve old behavior.
-
-### Feat
-
-- use custom RELEASE_TOKEN for bypassing branch protection
-- Add non-blocking UI rendering infrastructure (#3)
-
-### Fix
-
-- only push tags in release workflow, not commits
-- correct commitizen changelog_start_rev to use v prefix
-- add explicit git fetch tags step in release workflow
-- ensure tags are fetched in release workflow
-
 ## v0.1.0 (2025-10-20)
 
 ### Feat
