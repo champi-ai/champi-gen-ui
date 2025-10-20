@@ -79,11 +79,8 @@ jobs:
           echo "Incremental changelog:"
           cat body.md
 
-          # Push commit to remote
-          git push origin main
-
-          # Push tag that was created by cz bump
-          git push origin "v${REV}"
+          # Push commit and tags using authenticated URL (similar to commitizen-action)
+          git push https://x-access-token:${{ secrets.RELEASE_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main --tags
         else
           echo "No version change, skipping release"
           echo "No changes" > body.md
