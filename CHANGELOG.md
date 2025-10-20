@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Non-blocking UI rendering infrastructure with background threading
+- Command queue system for thread-safe widget operations
+- Auto-start canvas mechanism for MCP-driven UI creation
+- Automatic widget rendering when added via MCP tools
+- Signal handlers for graceful shutdown (SIGINT, SIGTERM)
+- `run_async()` method for non-blocking canvas execution
+- `ensure_canvas_running()` helper for lazy canvas initialization
+- `_ensure_canvas_active()` helper in MCP server for automatic canvas startup
+- Comprehensive rendering infrastructure documentation (RENDERING_INFRASTRUCTURE.md)
+- Test script for verifying MCP → UI rendering pipeline
+- Template workflow documentation (TEMPLATE_WORKFLOW.md) with best practices for template management
+
+### Changed
+- Canvas now supports both blocking (`run()`) and non-blocking (`run_async()`) modes
+- MCP widget tools now automatically ensure canvas is running before adding widgets
+- Widget additions now trigger automatic render updates via `_needs_render` flag
+- CLI entry point now includes cleanup handlers for proper resource management
+
+### Fixed
+- Critical issue where MCP tools could not trigger UI updates
+- Missing main UI event loop for background rendering
+- Thread safety issues between MCP server and UI rendering
+- Canvas not displaying widgets added via MCP tools
+
+## [0.1.0] - 2025-10-03
 
 ### Added
 - Initial project setup with comprehensive development infrastructure
@@ -56,22 +84,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/divagnz/champi-gen-ui/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/divagnz/champi-gen-ui/releases/tag/v0.1.0
-
-## v1.0.0 (2025-10-20)
-
-### BREAKING CHANGE
-
-- Canvas creation now auto-starts by default.
-Use auto_start=False to preserve old behavior.
-
-### Feat
-
-- use custom RELEASE_TOKEN for bypassing branch protection
-- Add non-blocking UI rendering infrastructure (#3)
-
-### Fix
-
-- only push tags in release workflow, not commits
-- correct commitizen changelog_start_rev to use v prefix
-- add explicit git fetch tags step in release workflow
-- ensure tags are fetched in release workflow

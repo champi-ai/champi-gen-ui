@@ -6,7 +6,7 @@ Large Language Models to create sophisticated user interfaces using ImGui
 through natural language commands.
 """
 
-__version__ = "1.0.0"
+__version__ = "0.1.0"
 __author__ = "Divagnz"
 
 from champi_gen_ui.core.canvas import Canvas, CanvasManager
