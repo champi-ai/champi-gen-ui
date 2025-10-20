@@ -22,7 +22,7 @@ jobs:
         fetch-depth: 0
 
     - name: Install uv
-      uses: astral-sh/setup-uv@7910d36f4f8f88194c023eb2d07e7c72c8970cd8 # v4.1.1
+      uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a # v4.2.0
       with:
         enable-cache: true
         cache-dependency-glob: uv.lock
@@ -64,7 +64,7 @@ jobs:
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
     - name: Install uv
-      uses: astral-sh/setup-uv@7910d36f4f8f88194c023eb2d07e7c72c8970cd8 # v4.1.1
+      uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a # v4.2.0
 
     - name: Set up Python
       run: uv python install 3.12
@@ -102,7 +102,7 @@ jobs:
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
     - name: Install uv
-      uses: astral-sh/setup-uv@7910d36f4f8f88194c023eb2d07e7c72c8970cd8 # v4.1.1
+      uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a # v4.2.0
 
     - name: Set up Python
       run: uv python install 3.12
