@@ -79,8 +79,12 @@ jobs:
           echo "Incremental changelog:"
           cat body.md
 
-          # Push changes and tags to remote
-          git push origin main --follow-tags
+          # Push commit to remote
+          git push origin main
+
+          # Create and push tag explicitly
+          git tag "v${REV}"
+          git push origin "v${REV}"
         else
           echo "No version change, skipping release"
           echo "No changes" > body.md
