@@ -43,16 +43,40 @@ jobs:
         echo "Previous version: $PREV_REV"
 
         # Run commitizen bump with changelog
-        cz bump --yes --changelog --changelog-to-stdout > body.md
+        # --no-raise 21: Don't fail on "No commits to bump" (exit code 21)
+        cz --no-raise 21 bump --yes --changelog
 
         # Get new version
         REV=$(cz version --project)
         echo "New version: $REV"
-        echo "version=${REV}" >> $GITHUB_OUTPUT
+        echo "version=v${REV}" >> $GITHUB_OUTPUT
 
-        # Push changes if version changed
+        # Extract incremental changelog for this version
+        # Get content between the new version header and the previous version header
         if [[ "$REV" != "$PREV_REV" ]]; then
+          # Try to extract just the new version's changelog
+          sed -n "/## v${REV}/,/## v${PREV_REV}/p" CHANGELOG.md | sed '$d' > body.md
+
+          # If body.md is empty, fall back to using the entire new version section
+          if [[ ! -s body.md ]]; then
+            sed -n "/## v${REV}/,/## /p" CHANGELOG.md | sed '$d' > body.md
+          fi
+
+          # If still empty, use a default message
+          if [[ ! -s body.md ]]; then
+            echo "Release v${REV}" > body.md
+            echo "" >> body.md
+            echo "See [CHANGELOG.md](CHANGELOG.md) for details." >> body.md
+          fi
+
+          echo "Incremental changelog:"
+          cat body.md
+
+          # Push changes and tags
           git push origin main --follow-tags
+        else
+          echo "No version change, skipping release"
+          echo "No changes" > body.md
         fi
 
     - name: Print Version
