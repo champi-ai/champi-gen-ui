@@ -21,15 +21,39 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.RELEASE_TOKEN }}
 
-    - name: Workaround for Docker Hub auth issues
-      run: docker logout docker.io
-
-    - name: Create bump and changelog
-      id: cz
-      uses: commitizen-tools/commitizen-action@5b0848cd060263e24602d1eba03710e056ef7711 # master
+    - name: Set up Python
+      uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
       with:
-        github_token: ${{ secrets.RELEASE_TOKEN }}
-        changelog_increment_filename: body.md
+        python-version: '3.12'
+
+    - name: Install commitizen
+      run: pip install commitizen
+
+    - name: Configure Git
+      run: |
+        git config --local user.name "github-actions[bot]"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local pull.rebase true
+
+    - name: Run commitizen bump
+      id: cz
+      run: |
+        # Get previous version
+        PREV_REV=$(cz version --project)
+        echo "Previous version: $PREV_REV"
+
+        # Run commitizen bump with changelog
+        cz bump --yes --changelog --changelog-to-stdout > body.md
+
+        # Get new version
+        REV=$(cz version --project)
+        echo "New version: $REV"
+        echo "version=${REV}" >> $GITHUB_OUTPUT
+
+        # Push changes if version changed
+        if [[ "$REV" != "$PREV_REV" ]]; then
+          git push origin main --follow-tags
+        fi
 
     - name: Print Version
       run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
@@ -37,7 +61,7 @@ jobs:
     - name: Install uv
       uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a # v4.2.0
 
-    - name: Set up Python
+    - name: Set up Python for build
       run: uv python install 3.12
 
     - name: Build package
