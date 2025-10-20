@@ -21,6 +21,9 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.RELEASE_TOKEN }}
 
+    - name: Workaround for Docker Hub auth issues
+      run: docker logout docker.io
+
     - name: Create bump and changelog
       id: cz
       uses: commitizen-tools/commitizen-action@5b0848cd060263e24602d1eba03710e056ef7711 # master
